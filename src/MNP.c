@@ -331,10 +331,10 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     /* draw alpha2 given Sigma and W */
     ss+=SS[n_cov][n_cov];   
     int row, columns;
-    for (double row=0; row<n_cov; row++)
+    for (int row=0; row<n_cov; row++)
     {
-        for(double columns=0; columns<n_cov; columns++)
-             printf("%d     ", SS[row][columns]);
+        for(int columns=0; columns<n_cov; columns++)
+             printf("%f     ", SS[row][columns]);
         printf("\n");
      }
     } 
