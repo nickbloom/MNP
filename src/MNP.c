@@ -29,6 +29,8 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
 	       int *verbose,  /* 1 if extra print is needed */ 
 	       int *piMoP,    /* 1 if Multinomial ordered Probit */
 	       int *latent,   /* 1 if W is stored */
+         int row, 
+         int columns,
 	       double *pdStore){
   
   /* paramerters from R */
@@ -330,13 +332,6 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     for(j=0; j<n_cov; j++) SWP(SS,j,n_cov+1); 
     /* draw alpha2 given Sigma and W */
     ss+=SS[n_cov][n_cov];   
-    int row, columns;
-    for(row=0; row<n_cov; row++){
-        for(columns=0; columns<n_cov; columns++)
-        printf("%f     ", SS[row][columns]);
-        printf("\n");
-     }
-    } 
     alpha2=ss/(double)rchisq((double)(n_samp+nu0)*n_dim); 
     
     /* draw beta given Sigma and W */
@@ -404,7 +399,13 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     if(*verbose) {
       if(main_loop == itempP) {
 	Rprintf("%3d percent done.\n", progress*10); 
-	itempP+=ftrunc((double) n_gen/10);  progress++; 
+	itempP+=ftrunc((double) n_gen/10);  progress++;
+  for(row=0; row<n_cov; row++){
+        for(columns=0; columns<n_cov; columns++)
+        printf("%f     ", SS[row][columns]);
+        printf("\n");
+     }
+    } 
 	R_FlushConsole();  
       }
     }
