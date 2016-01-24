@@ -14,20 +14,6 @@
 #include "subroutines.h"
 #include "rand.h"
 
-void PrMat(int(*matrix)[MAXSIZE][MAXSIZE], int row, int col)
-{   
-    int i, j;
-    printf("\n");
-    for (i = 0; i < row; i++)
-    {
-        for (j = 0; j < col; j++)
-        {
-            printf("%d ", *matrix[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
 
 void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen, 
 	       double *b0,    /* prior mean for beta */
@@ -410,8 +396,8 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
       if(main_loop == itempP) {
 	Rprintf("%3d percent done.\n", progress*10); 
   Rprintf("alpha2 is %d.\n", alpha2); 
-  PrMat(SS);
-  PrMat(ss);
+  Rprintf("SS is %d", SS);
+  Rprintf("ss is %d", ss);
 	itempP+=ftrunc((double) n_gen/10);  progress++; 
 	R_FlushConsole();  
       }
