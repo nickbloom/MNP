@@ -394,7 +394,6 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     if(*verbose) {
       if(main_loop == itempP) {
 	Rprintf("%3d percent done.\n", progress*10); 
-  Rprintf("alpha2 is %d.\n", alpha2); 
 	itempP+=ftrunc((double) n_gen/10);  progress++; 
 	R_FlushConsole();  
       }
