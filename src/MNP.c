@@ -14,15 +14,21 @@
 #include "subroutines.h"
 #include "rand.h"
 
-void printMatrice(matrice) {
-  int row, columns;
-for (int row=0; row<numberOfLines; row++)
-{
-    for(int columns=0; columns<numberColumns; columns++)
-         printf("%d     ", matrix[row][columns]);
+void PrMat(int(*matrix)[MAXSIZE][MAXSIZE], int row, int col)
+{   
+    int i, j;
     printf("\n");
- }
+    for (i = 0; i < row; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
+            printf("%d ", *matrix[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
 }
+
 void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen, 
 	       double *b0,    /* prior mean for beta */
 	       double *pdA0, int *piNu0, double *pdS, double *pdX, 
@@ -404,8 +410,8 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
       if(main_loop == itempP) {
 	Rprintf("%3d percent done.\n", progress*10); 
   Rprintf("alpha2 is %d.\n", alpha2); 
-  printMatrice(SS);
-  printMatrice(ss);
+  PrMat(SS);
+  PrMat(ss);
 	itempP+=ftrunc((double) n_gen/10);  progress++; 
 	R_FlushConsole();  
       }
