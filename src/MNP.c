@@ -399,13 +399,12 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     if(*verbose) {
       if(main_loop == itempP) {
 	Rprintf("%3d percent done.\n", progress*10); 
-	itempP+=ftrunc((double) n_gen/10);  progress++;
   for(row=0; row<n_cov; row++){
         for(columns=0; columns<n_cov; columns++)
         printf("%f     ", SS[row][columns]);
         printf("\n");
      }
-    } 
+	itempP+=ftrunc((double) n_gen/10);  progress++;
 	R_FlushConsole();  
       }
     }
