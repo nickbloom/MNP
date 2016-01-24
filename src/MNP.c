@@ -15,6 +15,8 @@
 #include "rand.h"
 
 
+
+
 void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen, 
 	       double *b0,    /* prior mean for beta */
 	       double *pdA0, int *piNu0, double *pdS, double *pdX, 
@@ -327,7 +329,15 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     /* SWEEP to get posterior mean and variance for beta */
     for(j=0; j<n_cov; j++) SWP(SS,j,n_cov+1); 
     /* draw alpha2 given Sigma and W */
-    ss+=SS[n_cov][n_cov];    
+    ss+=SS[n_cov][n_cov];   
+    int row, columns;
+    for (int row=0; row<n_cov; row++)
+    {
+        for(int columns=0; columns<n_cov; columns++)
+             printf("%d     ", ss[row][columns]);
+        printf("\n");
+     }
+    } 
     alpha2=ss/(double)rchisq((double)(n_samp+nu0)*n_dim); 
     
     /* draw beta given Sigma and W */
@@ -395,9 +405,6 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     if(*verbose) {
       if(main_loop == itempP) {
 	Rprintf("%3d percent done.\n", progress*10); 
-  Rprintf("alpha2 is %d.\n", alpha2); 
-  Rprintf("SS is %d", SS);
-  Rprintf("ss is %d", ss);
 	itempP+=ftrunc((double) n_gen/10);  progress++; 
 	R_FlushConsole();  
       }
