@@ -334,7 +334,7 @@ void cMNPgibbs(int *piNDim, int *piNCov, int *piNSamp, int *piNGen,
     for (int row=0; row<n_cov; row++)
     {
         for(int columns=0; columns<n_cov; columns++)
-             printf("%d     ", ss[row][columns]);
+             printf("%d     ", SS[row][columns]);
         printf("\n");
      }
     } 
